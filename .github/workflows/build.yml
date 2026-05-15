@@ -1,0 +1,92 @@
+name: Build and Release FAPs
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:  # allow manual run from Actions tab
+
+permissions:
+  contents: write  # needed to create releases and upload assets
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Cache ufbt SDK and toolchain
+        uses: actions/cache@v4
+        with:
+          path: ~/.ufbt
+          key: ufbt-unleashed-${{ runner.os }}-v1
+
+      - name: Install ufbt
+        run: pip install --upgrade ufbt
+
+      - name: Fetch Unleashed SDK
+        run: ufbt update --index-url=https://up.unleashedflip.com/directory.json
+
+      - name: Build alarm_clock
+        working-directory: alarm_clock
+        run: ufbt
+
+      - name: Build remote_hub
+        working-directory: remote_hub
+        run: ufbt
+
+      - name: Build spectrum_sniffer
+        working-directory: spectrum_sniffer
+        run: ufbt
+
+      - name: Build ir_killtv
+        working-directory: ir_killtv
+        run: ufbt
+
+      - name: Collect FAPs
+        run: |
+          mkdir -p _release
+          cp alarm_clock/dist/alarm_clock.fap         _release/
+          cp remote_hub/dist/remote_hub.fap           _release/
+          cp spectrum_sniffer/dist/spectrum_sniffer.fap _release/
+          cp ir_killtv/dist/ir_killtv.fap             _release/
+          ls -la _release/
+
+      - name: Upload FAPs as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: flipperz-faps
+          path: _release/*.fap
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          gh release create "$TAG" \
+            --title "Flipperz $TAG" \
+            --generate-notes \
+            --notes "Прошивка: **Unleashed unlshd-089**
+
+          ## Установка
+
+          1. Скачай нужный \`.fap\` из ассетов ниже
+          2. Через **qFlipper** скопируй на SD-карту Flipper'а в соответствующую папку:
+             - \`alarm_clock.fap\` → \`apps/Tools/\`
+             - \`remote_hub.fap\` → \`apps/Sub-GHz/\`
+             - \`spectrum_sniffer.fap\` → \`apps/Sub-GHz/\`
+             - \`ir_killtv.fap\` → \`apps/Infrared/\`
+          3. Запусти на Flipper'е через \`Apps → <категория> → <имя>\`
+
+          ## Совместимость
+
+          Собрано под Unleashed \`unlshd-089\`. На других ветках (Momentum, Xtreme, RogueMaster, official) скорее всего тоже заработает, но не гарантировано — если есть проблемы, собери из исходников под свою прошивку." \
+            _release/*.fap

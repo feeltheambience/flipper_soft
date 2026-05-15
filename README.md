@@ -11,7 +11,24 @@
 | [`spectrum_sniffer/`](./spectrum_sniffer) | Sub-GHz | RSSI-мониторинг 4-х ISM-частот (315 / 434 / 868 / 915 МГц) с пиковыми значениями. |
 | [`ir_killtv/`](./ir_killtv) | Infrared | Универсальный «выключатель телевизоров» — рассылает power-команды 14 брендов. |
 
-## Сборка и установка
+## Скачать готовые сборки
+
+Берёшь последний релиз: **[Releases](https://github.com/feeltheambience/flipper_soft/releases/latest)**.
+
+Там лежат уже скомпилированные `.fap` файлы. Установка:
+
+1. Скачай нужный `.fap`
+2. Подключи Flipper к компьютеру, открой **qFlipper**
+3. Перетащи `.fap` в соответствующую папку на SD-карте:
+   - `alarm_clock.fap` → `apps/Tools/`
+   - `remote_hub.fap` → `apps/Sub-GHz/`
+   - `spectrum_sniffer.fap` → `apps/Sub-GHz/`
+   - `ir_killtv.fap` → `apps/Infrared/`
+4. На Flipper'е: `Apps → <категория> → <имя>`
+
+Сборки делаются автоматически через GitHub Actions под Unleashed `unlshd-089`.
+
+## Сборка из исходников
 
 Нужен Python 3.10+ и USB-кабель.
 
