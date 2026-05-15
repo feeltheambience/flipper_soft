@@ -1,0 +1,12 @@
+App(
+    appid="alarm_clock",
+    name="Alarm Clock",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="alarm_clock_app",
+    requires=["gui"],
+    stack_size=4 * 1024,
+    fap_category="Tools",
+    fap_author="you",
+    fap_version="1.0",
+    fap_description="Simple alarm clock with vibro and siren",
+)

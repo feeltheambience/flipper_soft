@@ -1,0 +1,16 @@
+# ufbt build artifacts
+dist/
+.vscode/
+*.fap
+*.elf
+*.map
+*.d
+*.o
+
+# ufbt user state
+.ufbt/
+
+# OS junk
+Thumbs.db
+.DS_Store
+*~

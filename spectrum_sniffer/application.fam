@@ -1,0 +1,12 @@
+App(
+    appid="spectrum_sniffer",
+    name="Spectrum Sniffer",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="spectrum_sniffer_app",
+    requires=["gui"],
+    stack_size=2 * 1024,
+    fap_category="Sub-GHz",
+    fap_author="you",
+    fap_version="1.0",
+    fap_description="RSSI monitor across common ISM bands",
+)

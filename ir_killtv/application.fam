@@ -1,0 +1,12 @@
+App(
+    appid="ir_killtv",
+    name="IR Kill TV",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="ir_killtv_app",
+    requires=["gui"],
+    stack_size=2 * 1024,
+    fap_category="Infrared",
+    fap_author="you",
+    fap_version="1.0",
+    fap_description="Universal TV power-off across major brands",
+)
