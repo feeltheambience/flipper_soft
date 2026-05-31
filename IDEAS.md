@@ -18,6 +18,7 @@
 | Remote Hub | Sub-GHz | Быстрый запуск сохранённых `.sub` из плоской папки | средняя | ✅ собрано | ✓ |
 | Spectrum Sniffer | Sub-GHz | RSSI-монитор 4 ISM-частот с пиками | средняя | ✅ собрано | ✓ |
 | IR Kill TV | Infrared | Power-команды 14 брендов ТВ подряд | низкая | ✅ собрано | ✗ |
+| RDP Manager | USB | BadUSB-меню: вкл/выкл Windows RDP, добавить юзера, статус | высокая | ✅ собрано | ⚠️ |
 
 ## Tools / Standalone (без доп. железа)
 

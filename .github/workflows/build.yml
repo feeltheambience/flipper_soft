@@ -50,13 +50,18 @@ jobs:
         working-directory: ir_killtv
         run: ufbt
 
+      - name: Build rdp_manager
+        working-directory: rdp_manager
+        run: ufbt
+
       - name: Collect FAPs
         run: |
           mkdir -p _release
-          cp alarm_clock/dist/alarm_clock.fap         _release/
-          cp remote_hub/dist/remote_hub.fap           _release/
+          cp alarm_clock/dist/alarm_clock.fap           _release/
+          cp remote_hub/dist/remote_hub.fap             _release/
           cp spectrum_sniffer/dist/spectrum_sniffer.fap _release/
-          cp ir_killtv/dist/ir_killtv.fap             _release/
+          cp ir_killtv/dist/ir_killtv.fap               _release/
+          cp rdp_manager/dist/rdp_manager.fap           _release/
           ls -la _release/
 
       - name: Upload FAPs as workflow artifact
@@ -84,6 +89,7 @@ jobs:
              - \`remote_hub.fap\` → \`apps/Sub-GHz/\`
              - \`spectrum_sniffer.fap\` → \`apps/Sub-GHz/\`
              - \`ir_killtv.fap\` → \`apps/Infrared/\`
+             - \`rdp_manager.fap\` → \`apps/USB/\`
           3. Запусти на Flipper'е через \`Apps → <категория> → <имя>\`
 
           ## Совместимость
