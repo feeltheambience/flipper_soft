@@ -1,0 +1,12 @@
+App(
+    appid="token_tracker",
+    name="Token Tracker",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="token_tracker_app",
+    requires=["gui"],
+    stack_size=4 * 1024,
+    fap_category="USB",
+    fap_author="feeltheambience",
+    fap_version="1.0",
+    fap_description="Live LLM API token budget tracker",
+)

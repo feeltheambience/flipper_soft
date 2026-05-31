@@ -23,6 +23,9 @@
 | Button Jiggler | USB | Нажатие клавиши (Space/Shift/F15) раз в N мин | низкая | ✅ собрано | ✓ |
 | System Dashboard | USB | Live CPU/RAM/Disk/Net с PC-демона | средняя | ✅ собрано | ✓ |
 | Pomodoro Sync | USB | Pomodoro-таймер + desktop-нотификации на PC | средняя | ✅ собрано | ✓ |
+| Vibe Idle Keeper | USB | Умный anti-idle для AI-сессий: Shift/mouse + рандом + пресеты | низкая | ✅ собрано | ✓ |
+| Token Tracker | USB | Live дашборд LLM API расходов (день/месяц/бюджет) | средняя | ✅ собрано | ✓ |
+| VPN Keeper | USB | Windows VPN watchdog: PC-демон автоподнимает, Flipper показывает статус | средняя | ✅ собрано | ✓ |
 
 ## Tools / Standalone (без доп. железа)
 

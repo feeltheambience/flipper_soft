@@ -70,6 +70,18 @@ jobs:
         working-directory: pomodoro_sync
         run: ufbt
 
+      - name: Build vibe_idle_keeper
+        working-directory: vibe_idle_keeper
+        run: ufbt
+
+      - name: Build token_tracker
+        working-directory: token_tracker
+        run: ufbt
+
+      - name: Build vpn_keeper
+        working-directory: vpn_keeper
+        run: ufbt
+
       - name: Collect FAPs
         run: |
           mkdir -p _release
@@ -82,6 +94,9 @@ jobs:
           cp button_jiggler/dist/button_jiggler.fap       _release/
           cp system_dashboard/dist/system_dashboard.fap   _release/
           cp pomodoro_sync/dist/pomodoro_sync.fap         _release/
+          cp vibe_idle_keeper/dist/vibe_idle_keeper.fap   _release/
+          cp token_tracker/dist/token_tracker.fap         _release/
+          cp vpn_keeper/dist/vpn_keeper.fap               _release/
           ls -la _release/
 
       - name: Upload FAPs as workflow artifact
@@ -114,6 +129,9 @@ jobs:
              - \`button_jiggler.fap\` → \`apps/USB/\`
              - \`system_dashboard.fap\` → \`apps/USB/\`
              - \`pomodoro_sync.fap\` → \`apps/USB/\`
+             - \`vibe_idle_keeper.fap\` → \`apps/USB/\`
+             - \`token_tracker.fap\` → \`apps/USB/\`
+             - \`vpn_keeper.fap\` → \`apps/USB/\`
           3. Запусти на Flipper'е через \`Apps → <категория> → <имя>\`
 
           ## Совместимость

@@ -15,6 +15,9 @@
 | [`button_jiggler/`](./button_jiggler) | USB | HID-клавиатура: нажатие Space/Shift/F15 раз в N минут. Win/Mac/Linux. |
 | [`system_dashboard/`](./system_dashboard) | USB | Live CPU/RAM/Disk/Net на экране Flipper'а от PC-демона. Win/Mac/Linux. |
 | [`pomodoro_sync/`](./pomodoro_sync) | USB | Pomodoro-таймер + desktop-уведомления через PC-демон. Win/Mac/Linux. |
+| [`vibe_idle_keeper/`](./vibe_idle_keeper) | USB | Умный anti-idle для долгих AI-сессий (Claude/Cursor): рандом + пресеты. |
+| [`token_tracker/`](./token_tracker) | USB | Live дашборд расходов LLM API. Бар «$X / $Y today». PC-демон. |
+| [`vpn_keeper/`](./vpn_keeper) | USB | Windows VPN watchdog — поднимает упавший VPN. Статус на Flipper'е. |
 
 ## Скачать готовые сборки
 
