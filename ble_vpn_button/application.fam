@@ -1,0 +1,12 @@
+App(
+    appid="ble_vpn_button",
+    name="BLE VPN Button",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="ble_vpn_button_app",
+    requires=["gui", "bt"],
+    stack_size=4 * 1024,
+    fap_category="Bluetooth",
+    fap_author="feeltheambience",
+    fap_version="1.0",
+    fap_description="Wireless VPN toggle via BLE GATT serial",
+)

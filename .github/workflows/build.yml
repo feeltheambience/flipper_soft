@@ -82,6 +82,10 @@ jobs:
         working-directory: vpn_keeper
         run: ufbt
 
+      - name: Build ble_vpn_button
+        working-directory: ble_vpn_button
+        run: ufbt
+
       - name: Collect FAPs
         run: |
           mkdir -p _release
@@ -97,6 +101,7 @@ jobs:
           cp vibe_idle_keeper/dist/vibe_idle_keeper.fap   _release/
           cp token_tracker/dist/token_tracker.fap         _release/
           cp vpn_keeper/dist/vpn_keeper.fap               _release/
+          cp ble_vpn_button/dist/ble_vpn_button.fap       _release/
           ls -la _release/
 
       - name: Upload FAPs as workflow artifact
@@ -132,6 +137,7 @@ jobs:
              - \`vibe_idle_keeper.fap\` → \`apps/USB/\`
              - \`token_tracker.fap\` → \`apps/USB/\`
              - \`vpn_keeper.fap\` → \`apps/USB/\`
+             - \`ble_vpn_button.fap\` → \`apps/Bluetooth/\`
           3. Запусти на Flipper'е через \`Apps → <категория> → <имя>\`
 
           ## Совместимость

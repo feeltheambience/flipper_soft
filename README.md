@@ -18,6 +18,7 @@
 | [`vibe_idle_keeper/`](./vibe_idle_keeper) | USB | Умный anti-idle для долгих AI-сессий (Claude/Cursor): рандом + пресеты. |
 | [`token_tracker/`](./token_tracker) | USB | Live дашборд расходов LLM API. Бар «$X / $Y today». PC-демон. |
 | [`vpn_keeper/`](./vpn_keeper) | USB | Windows VPN watchdog — поднимает упавший VPN. Статус на Flipper'е. |
+| [`ble_vpn_button/`](./ble_vpn_button) | Bluetooth | Беспроводной toggle Windows VPN через BLE GATT + Python-демон. |
 
 ## Скачать готовые сборки
 
