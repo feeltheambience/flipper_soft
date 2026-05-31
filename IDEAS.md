@@ -19,6 +19,10 @@
 | Spectrum Sniffer | Sub-GHz | RSSI-монитор 4 ISM-частот с пиками | средняя | ✅ собрано | ✓ |
 | IR Kill TV | Infrared | Power-команды 14 брендов ТВ подряд | низкая | ✅ собрано | ✗ |
 | RDP Manager | USB | BadUSB-меню: вкл/выкл Windows RDP, добавить юзера, статус | высокая | ✅ собрано | ⚠️ |
+| Mouse Jiggler | USB | Микро-движение мыши раз в N сек, чтобы PC не спал | низкая | ✅ собрано | ✓ |
+| Button Jiggler | USB | Нажатие клавиши (Space/Shift/F15) раз в N мин | низкая | ✅ собрано | ✓ |
+| System Dashboard | USB | Live CPU/RAM/Disk/Net с PC-демона | средняя | ✅ собрано | ✓ |
+| Pomodoro Sync | USB | Pomodoro-таймер + desktop-нотификации на PC | средняя | ✅ собрано | ✓ |
 
 ## Tools / Standalone (без доп. железа)
 

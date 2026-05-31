@@ -11,6 +11,10 @@
 | [`spectrum_sniffer/`](./spectrum_sniffer) | Sub-GHz | RSSI-мониторинг 4-х ISM-частот (315 / 434 / 868 / 915 МГц) с пиковыми значениями. |
 | [`ir_killtv/`](./ir_killtv) | Infrared | Универсальный «выключатель телевизоров» — рассылает power-команды 14 брендов. |
 | [`rdp_manager/`](./rdp_manager) | USB | BadUSB-меню: включить/выключить Windows RDP, добавить юзера, показать статус. |
+| [`mouse_jiggler/`](./mouse_jiggler) | USB | HID-мышь: микро-движение раз в N сек, чтобы PC не уходил в сон. Win/Mac/Linux. |
+| [`button_jiggler/`](./button_jiggler) | USB | HID-клавиатура: нажатие Space/Shift/F15 раз в N минут. Win/Mac/Linux. |
+| [`system_dashboard/`](./system_dashboard) | USB | Live CPU/RAM/Disk/Net на экране Flipper'а от PC-демона. Win/Mac/Linux. |
+| [`pomodoro_sync/`](./pomodoro_sync) | USB | Pomodoro-таймер + desktop-уведомления через PC-демон. Win/Mac/Linux. |
 
 ## Скачать готовые сборки
 

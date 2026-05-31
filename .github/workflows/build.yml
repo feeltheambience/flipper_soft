@@ -54,14 +54,34 @@ jobs:
         working-directory: rdp_manager
         run: ufbt
 
+      - name: Build mouse_jiggler
+        working-directory: mouse_jiggler
+        run: ufbt
+
+      - name: Build button_jiggler
+        working-directory: button_jiggler
+        run: ufbt
+
+      - name: Build system_dashboard
+        working-directory: system_dashboard
+        run: ufbt
+
+      - name: Build pomodoro_sync
+        working-directory: pomodoro_sync
+        run: ufbt
+
       - name: Collect FAPs
         run: |
           mkdir -p _release
-          cp alarm_clock/dist/alarm_clock.fap           _release/
-          cp remote_hub/dist/remote_hub.fap             _release/
-          cp spectrum_sniffer/dist/spectrum_sniffer.fap _release/
-          cp ir_killtv/dist/ir_killtv.fap               _release/
-          cp rdp_manager/dist/rdp_manager.fap           _release/
+          cp alarm_clock/dist/alarm_clock.fap             _release/
+          cp remote_hub/dist/remote_hub.fap               _release/
+          cp spectrum_sniffer/dist/spectrum_sniffer.fap   _release/
+          cp ir_killtv/dist/ir_killtv.fap                 _release/
+          cp rdp_manager/dist/rdp_manager.fap             _release/
+          cp mouse_jiggler/dist/mouse_jiggler.fap         _release/
+          cp button_jiggler/dist/button_jiggler.fap       _release/
+          cp system_dashboard/dist/system_dashboard.fap   _release/
+          cp pomodoro_sync/dist/pomodoro_sync.fap         _release/
           ls -la _release/
 
       - name: Upload FAPs as workflow artifact
@@ -90,6 +110,10 @@ jobs:
              - \`spectrum_sniffer.fap\` → \`apps/Sub-GHz/\`
              - \`ir_killtv.fap\` → \`apps/Infrared/\`
              - \`rdp_manager.fap\` → \`apps/USB/\`
+             - \`mouse_jiggler.fap\` → \`apps/USB/\`
+             - \`button_jiggler.fap\` → \`apps/USB/\`
+             - \`system_dashboard.fap\` → \`apps/USB/\`
+             - \`pomodoro_sync.fap\` → \`apps/USB/\`
           3. Запусти на Flipper'е через \`Apps → <категория> → <имя>\`
 
           ## Совместимость
