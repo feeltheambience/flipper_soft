@@ -2,8 +2,11 @@
 """
 System Dashboard — PC-side daemon for Flipper Zero.
 
-Sends CPU / RAM / Disk / Network metrics to Flipper via the second CDC
+Sends CPU / RAM / GPU / Network metrics to Flipper via the second CDC
 interface (the one not used by qFlipper RPC).
+
+GPU usage is read via `nvidia-smi` (NVIDIA cards). If nvidia-smi is not
+available, GPU shows as 0.
 
 Usage:
     python dashboard.py            # auto-detect Flipper, use second port
@@ -13,6 +16,7 @@ Usage:
 import sys
 import time
 import platform
+import subprocess
 import serial
 import psutil
 from serial.tools import list_ports
@@ -21,6 +25,36 @@ FLIPPER_VID = 0x0483
 FLIPPER_PID = 0x5740
 BAUDRATE = 115200
 SAMPLE_INTERVAL = 1.0  # seconds
+
+
+_gpu_warned = False
+
+
+def get_gpu_pct():
+    """Reads GPU utilization % via nvidia-smi. Returns 0 if unavailable."""
+    global _gpu_warned
+    try:
+        r = subprocess.run(
+            ["nvidia-smi",
+             "--query-gpu=utilization.gpu",
+             "--format=csv,noheader,nounits"],
+            capture_output=True, text=True, timeout=2,
+            creationflags=subprocess.CREATE_NO_WINDOW
+            if hasattr(subprocess, 'CREATE_NO_WINDOW') else 0)
+        if r.returncode == 0:
+            # Multiple GPUs → take the first
+            val = r.stdout.strip().split("\n")[0].strip()
+            return int(val) if val.isdigit() else 0
+    except FileNotFoundError:
+        if not _gpu_warned:
+            print("nvidia-smi not found — GPU stays at 0. Install NVIDIA "
+                  "drivers or use a non-NVIDIA GPU reader.")
+            _gpu_warned = True
+    except Exception as e:
+        if not _gpu_warned:
+            print(f"GPU read error: {e}")
+            _gpu_warned = True
+    return 0
 
 
 def find_second_flipper_port():
@@ -59,8 +93,7 @@ def main():
         while True:
             cpu = int(psutil.cpu_percent(interval=SAMPLE_INTERVAL))
             ram = int(psutil.virtual_memory().percent)
-            disk_path = "C:\\" if platform.system() == "Windows" else "/"
-            disk = int(psutil.disk_usage(disk_path).percent)
+            gpu = get_gpu_pct()
 
             now_net = psutil.net_io_counters()
             now_t = time.time()
@@ -70,7 +103,7 @@ def main():
             net_kbps = int(delta / dt / 1024) if dt > 0 else 0
             last_net, last_t = now_net, now_t
 
-            line = f"STATS,{cpu},{ram},{disk},{net_kbps}\n"
+            line = f"STATS,{cpu},{ram},{gpu},{net_kbps}\n"
             ser.write(line.encode())
             print(line.strip())
 

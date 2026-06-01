@@ -17,7 +17,7 @@ typedef struct {
     bool got_data;
     uint32_t cpu;
     uint32_t ram;
-    uint32_t disk;
+    uint32_t gpu;
     uint32_t net_kbps;
     char line_buf[LINE_BUF_SZ];
     int line_pos;
@@ -42,14 +42,14 @@ static CdcCallbacks cdc_cbs = {
 };
 
 static void parse_line(App* app, const char* line) {
-    // Expected: "STATS,cpu,ram,disk,net_kbps"
+    // Expected: "STATS,cpu,ram,gpu,net_kbps"
     if(strncmp(line, "STATS,", 6) != 0) return;
-    unsigned int cpu = 0, ram = 0, disk = 0, net = 0;
-    if(sscanf(line + 6, "%u,%u,%u,%u", &cpu, &ram, &disk, &net) == 4) {
+    unsigned int cpu = 0, ram = 0, gpu = 0, net = 0;
+    if(sscanf(line + 6, "%u,%u,%u,%u", &cpu, &ram, &gpu, &net) == 4) {
         furi_mutex_acquire(app->mutex, FuriWaitForever);
         app->cpu = cpu > 100 ? 100 : cpu;
         app->ram = ram > 100 ? 100 : ram;
-        app->disk = disk > 100 ? 100 : disk;
+        app->gpu = gpu > 100 ? 100 : gpu;
         app->net_kbps = net;
         app->got_data = true;
         furi_mutex_release(app->mutex);
@@ -90,8 +90,8 @@ static void draw_cb(Canvas* canvas, void* ctx) {
         draw_bar(canvas, 2, 26, 60, 8, app->cpu, "CPU", val);
         snprintf(val, sizeof(val), "%lu%%", (unsigned long)app->ram);
         draw_bar(canvas, 2, 38, 60, 8, app->ram, "RAM", val);
-        snprintf(val, sizeof(val), "%lu%%", (unsigned long)app->disk);
-        draw_bar(canvas, 2, 50, 60, 8, app->disk, "DSK", val);
+        snprintf(val, sizeof(val), "%lu%%", (unsigned long)app->gpu);
+        draw_bar(canvas, 2, 50, 60, 8, app->gpu, "GPU", val);
         // Network — show kbps as text (no good cap to bar against)
         snprintf(val, sizeof(val), "NET: %lu KB/s", (unsigned long)app->net_kbps);
         canvas_draw_str(canvas, 2, 62, val);
