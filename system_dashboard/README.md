@@ -24,15 +24,44 @@ ufbt launch
 
 Категория: `apps/USB/`.
 
-### 2. На ПК
+### 2. На ПК — два варианта
+
+**Вариант A: разовый запуск (для теста)**
 ```bash
 cd system_dashboard/pc_daemon
 pip install -r requirements.txt
 python dashboard.py
 ```
 
-При запуске демон автоматически находит **второй** Flipper-COM-порт (первый занят qFlipper'ом). Если нашлось несколько устройств — передай порт явно:
+Демон автоматически находит **второй** Flipper-COM-порт (первый занят qFlipper RPC), стримит данные. При выходе из FAP на Flipper'е — демон ждёт и автопереподключается. Ctrl+C для остановки.
 
+**Вариант B: авто-старт при логине в Windows** ⭐ рекомендую
+```powershell
+cd system_dashboard\pc_daemon
+.\install_autostart.ps1
+```
+
+Что делает:
+- Ставит зависимости (`pyserial`, `psutil`)
+- Регистрирует **Scheduled Task** «Flipper System Dashboard» с триггером «At Logon»
+- Запускает через **`pythonw.exe`** — нет консольного окна, демон невидимый
+- Стартует прямо сейчас, потом сам поднимается при каждом входе в Windows
+
+После установки **тебе ничего не нужно делать руками**:
+1. Включил ноут → демон уже работает в фоне
+2. Подключил Flipper, открыл `System Dashboard` на нём → столбики появляются за 1-2 секунды
+3. Закрыл FAP → демон молча ждёт, при следующем открытии снова подключится
+
+Логи демона: `%USERPROFILE%\.flipper_dashboard.log` (пишет ошибки и состояния).
+
+**Удалить авто-старт:**
+```powershell
+.\uninstall_autostart.ps1
+```
+
+Если что-то идёт не так — проверь `Get-ScheduledTask -TaskName "Flipper System Dashboard"` и лог-файл.
+
+**Явный порт** если нужно (для любого варианта):
 ```bash
 # Windows
 python dashboard.py COM7

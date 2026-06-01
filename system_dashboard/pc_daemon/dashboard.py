@@ -13,13 +13,24 @@ Usage:
     python dashboard.py COM7       # explicit port (Windows)
     python dashboard.py /dev/tty.usbmodem142103   # explicit (macOS/Linux)
 """
+import os
 import sys
 import time
 import platform
 import subprocess
 import serial
 import psutil
+from pathlib import Path
 from serial.tools import list_ports
+
+# When launched via pythonw.exe (autostart, no console) stdout is None.
+# Redirect to a log file so prints don't blow up.
+if sys.stdout is None or not hasattr(sys.stdout, 'write'):
+    _log_path = Path.home() / ".flipper_dashboard.log"
+    _log = open(_log_path, "a", buffering=1, encoding="utf-8")
+    sys.stdout = _log
+    sys.stderr = _log
+    print(f"\n=== Started {time.strftime('%Y-%m-%d %H:%M:%S')} (pythonw mode) ===")
 
 FLIPPER_VID = 0x0483
 FLIPPER_PID = 0x5740
@@ -71,48 +82,64 @@ def find_second_flipper_port():
     return None
 
 
-def main():
-    port = sys.argv[1] if len(sys.argv) > 1 else find_second_flipper_port()
-    if not port:
-        print("Flipper not found. Plug it in and start System Dashboard.")
-        print(f"OS: {platform.system()}")
-        sys.exit(1)
-
-    print(f"Connecting to {port} @ {BAUDRATE}")
+def stream_loop(ser):
+    """Send stats until the serial errors out. Returns on disconnect."""
     last_net = psutil.net_io_counters()
     last_t = time.time()
-
-    try:
-        ser = serial.Serial(port, BAUDRATE, timeout=1)
-    except serial.SerialException as e:
-        print(f"Cannot open {port}: {e}")
-        sys.exit(1)
-
     print("Streaming. Ctrl+C to stop.")
-    try:
-        while True:
-            cpu = int(psutil.cpu_percent(interval=SAMPLE_INTERVAL))
-            ram = int(psutil.virtual_memory().percent)
-            gpu = get_gpu_pct()
+    while True:
+        cpu = int(psutil.cpu_percent(interval=SAMPLE_INTERVAL))
+        ram = int(psutil.virtual_memory().percent)
+        gpu = get_gpu_pct()
 
-            now_net = psutil.net_io_counters()
-            now_t = time.time()
-            dt = now_t - last_t
-            delta = (now_net.bytes_sent + now_net.bytes_recv) - \
-                    (last_net.bytes_sent + last_net.bytes_recv)
-            net_kbps = int(delta / dt / 1024) if dt > 0 else 0
-            last_net, last_t = now_net, now_t
+        now_net = psutil.net_io_counters()
+        now_t = time.time()
+        dt = now_t - last_t
+        delta = (now_net.bytes_sent + now_net.bytes_recv) - \
+                (last_net.bytes_sent + last_net.bytes_recv)
+        net_kbps = int(delta / dt / 1024) if dt > 0 else 0
+        last_net, last_t = now_net, now_t
 
-            line = f"STATS,{cpu},{ram},{gpu},{net_kbps}\n"
+        line = f"STATS,{cpu},{ram},{gpu},{net_kbps}\n"
+        try:
             ser.write(line.encode())
-            print(line.strip())
+        except (serial.SerialException, OSError) as e:
+            print(f"Write failed (Flipper likely closed app): {e}")
+            return
+        print(line.strip())
 
-    except KeyboardInterrupt:
-        print("\nStopped.")
-    except serial.SerialException as e:
-        print(f"Serial error: {e}")
-    finally:
-        ser.close()
+
+def main():
+    explicit = sys.argv[1] if len(sys.argv) > 1 else None
+
+    print(f"OS: {platform.system()}, baud {BAUDRATE}")
+    print("Waiting for Flipper... (Ctrl+C to stop)")
+
+    while True:
+        try:
+            port = explicit or find_second_flipper_port()
+            if not port:
+                time.sleep(2)
+                continue
+
+            print(f"Opening {port}")
+            try:
+                ser = serial.Serial(port, BAUDRATE, timeout=1)
+            except serial.SerialException as e:
+                print(f"Cannot open {port}: {e}. Retrying in 2s.")
+                time.sleep(2)
+                continue
+
+            try:
+                stream_loop(ser)
+            finally:
+                ser.close()
+
+            print("Disconnected. Waiting for Flipper to reappear...")
+            time.sleep(2)
+        except KeyboardInterrupt:
+            print("\nStopped.")
+            return
 
 
 if __name__ == "__main__":
