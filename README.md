@@ -19,6 +19,8 @@
 | [`token_tracker/`](./token_tracker) | USB | Live дашборд расходов LLM API. Бар «$X / $Y today». PC-демон. |
 | [`vpn_keeper/`](./vpn_keeper) | USB | Windows VPN watchdog — поднимает упавший VPN. Статус на Flipper'е. |
 | [`ble_vpn_button/`](./ble_vpn_button) | Bluetooth | Беспроводной toggle Windows VPN через BLE GATT + Python-демон. |
+| [`white_noise/`](./white_noise) | Media | Генератор фонового шума с таймером сна. 6 пресетов. |
+| [`life_scenes/`](./life_scenes) | Tools | Движок сценариев: одна кнопка → цепочка IR + пауз + вибро. |
 
 ## Скачать готовые сборки
 

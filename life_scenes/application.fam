@@ -1,0 +1,12 @@
+App(
+    appid="life_scenes",
+    name="Life Scenes",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="life_scenes_app",
+    requires=["gui"],
+    stack_size=4 * 1024,
+    fap_category="Tools",
+    fap_author="feeltheambience",
+    fap_version="1.0",
+    fap_description="Multi-step automation scenes (IR + delays + vibro)",
+)

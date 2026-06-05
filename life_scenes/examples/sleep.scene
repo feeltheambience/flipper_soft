@@ -1,0 +1,12 @@
+# Sleep — turn everything off
+# Replace IR codes with your own remotes.
+NAME,Sleep
+# Turn off TV
+IR,Samsung32,0x07,0x02
+DELAY,800
+# Turn off AC
+IR,NEC,0x40,0x12
+DELAY,500
+# Gentle goodnight buzz
+VIBRO,400
+BEEP,600,250

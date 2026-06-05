@@ -27,6 +27,8 @@
 | Token Tracker | USB | Live дашборд LLM API расходов (день/месяц/бюджет) | средняя | ✅ собрано | ✓ |
 | VPN Keeper | USB | Windows VPN watchdog: PC-демон автоподнимает, Flipper показывает статус | средняя | ✅ собрано | ✓ |
 | BLE VPN Button | Bluetooth | Беспроводной toggle Windows VPN через BLE GATT + Python-демон | высокая | ✅ собрано | ⚠️ |
+| White Noise | Media | Генератор шума (white/pink/brown/fan/ocean/rain) + таймер сна | низкая | ✅ собрано | ✓ |
+| Life Scenes | Tools | Движок мультишаговых сцен (IR + паузы + вибро + бип) | высокая | ✅ собрано | ✓ |
 
 ## Tools / Standalone (без доп. железа)
 

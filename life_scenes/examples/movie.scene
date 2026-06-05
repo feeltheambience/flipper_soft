@@ -1,0 +1,16 @@
+# Movie Night
+# NOTE: IR codes below are Samsung/generic examples — replace with
+# your own remotes' protocol/address/command (learn via Infrared app).
+NAME,Movie Night
+# Turn on TV (Samsung power)
+IR,Samsung32,0x07,0x02
+# Wait for TV to boot
+DELAY,3000
+# Switch to HDMI2 (example NEC code)
+IR,NEC,0x04,0x0B
+DELAY,500
+# Lower AC a bit (example)
+IR,NEC,0x40,0x12
+# Ready beep
+BEEP,1400,150
+VIBRO,150

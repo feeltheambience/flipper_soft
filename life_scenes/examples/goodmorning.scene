@@ -1,0 +1,16 @@
+# Good Morning
+# Replace IR codes with your own remotes.
+NAME,Good Morning
+# Wake-up buzz
+VIBRO,300
+BEEP,1000,120
+DELAY,300
+BEEP,1400,120
+# Turn on TV for morning news
+IR,Samsung32,0x07,0x02
+DELAY,2500
+# Switch to news channel (example NEC channel-up)
+IR,NEC,0x04,0x10
+DELAY,400
+# Turn on AC
+IR,NEC,0x40,0x12

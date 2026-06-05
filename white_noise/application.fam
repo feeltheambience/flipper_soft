@@ -1,0 +1,12 @@
+App(
+    appid="white_noise",
+    name="White Noise",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="white_noise_app",
+    requires=["gui"],
+    stack_size=2 * 1024,
+    fap_category="Media",
+    fap_author="feeltheambience",
+    fap_version="1.0",
+    fap_description="White/pink/brown noise machine with sleep timer",
+)
