@@ -1,0 +1,12 @@
+App(
+    appid="ibutton_fuzzer",
+    name="iButton Seq Fuzzer",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="ibutton_fuzzer_app",
+    requires=["gui"],
+    stack_size=4 * 1024,
+    fap_category="iButton",
+    fap_author="feeltheambience",
+    fap_version="1.0",
+    fap_description="Sequential iButton ID fuzzer with audit log (authorized pentest)",
+)

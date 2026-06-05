@@ -94,6 +94,10 @@ jobs:
         working-directory: life_scenes
         run: ufbt
 
+      - name: Build ibutton_fuzzer
+        working-directory: ibutton_fuzzer
+        run: ufbt
+
       - name: Collect FAPs
         run: |
           mkdir -p _release
@@ -112,6 +116,7 @@ jobs:
           cp ble_vpn_button/dist/ble_vpn_button.fap       _release/
           cp white_noise/dist/white_noise.fap             _release/
           cp life_scenes/dist/life_scenes.fap             _release/
+          cp ibutton_fuzzer/dist/ibutton_fuzzer.fap       _release/
           ls -la _release/
 
       - name: Upload FAPs as workflow artifact
@@ -150,6 +155,7 @@ jobs:
              - \`ble_vpn_button.fap\` → \`apps/Bluetooth/\`
              - \`white_noise.fap\` → \`apps/Media/\`
              - \`life_scenes.fap\` → \`apps/Tools/\` (+ положи .scene в \`/ext/life_scenes/\`)
+             - \`ibutton_fuzzer.fap\` → \`apps/iButton/\` (только авторизованный пентест)
           3. Запусти на Flipper'е через \`Apps → <категория> → <имя>\`
 
           ## Совместимость
