@@ -30,6 +30,7 @@
 | White Noise | Media | Генератор шума (white/pink/brown/fan/ocean/rain) + таймер сна | низкая | ✅ собрано | ✓ |
 | Life Scenes | Tools | Движок мультишаговых сцен (IR + паузы + вибро + бип) | высокая | ✅ собрано | ✓ |
 | iButton Seq Fuzzer | iButton | Sequential-fuzz вокруг валидного ключа + audit-лог (пентест) | высокая | ✅ собрано | ⚠️ |
+| SubGHz DeBruijn | Sub-GHz | Быстрый fixed-code брут через De Bruijn (~75x), CAME/NICE 12-bit (пентест) | высокая | ✅ собрано | ⚠️ |
 
 ## Tools / Standalone (без доп. железа)
 

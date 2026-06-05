@@ -22,6 +22,7 @@
 | [`white_noise/`](./white_noise) | Media | Генератор фонового шума с таймером сна. 6 пресетов. |
 | [`life_scenes/`](./life_scenes) | Tools | Движок сценариев: одна кнопка → цепочка IR + пауз + вибро. |
 | [`ibutton_fuzzer/`](./ibutton_fuzzer) | iButton | Sequential-fuzzer ID вокруг валидного ключа + audit-лог. Только авторизованный пентест. |
+| [`subghz_debruijn/`](./subghz_debruijn) | Sub-GHz | Быстрый fixed-code брут через De Bruijn (~75x). CAME/NICE. Только авторизованный пентест. |
 
 ## Скачать готовые сборки
 

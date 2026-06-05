@@ -98,6 +98,10 @@ jobs:
         working-directory: ibutton_fuzzer
         run: ufbt
 
+      - name: Build subghz_debruijn
+        working-directory: subghz_debruijn
+        run: ufbt
+
       - name: Collect FAPs
         run: |
           mkdir -p _release
@@ -117,6 +121,7 @@ jobs:
           cp white_noise/dist/white_noise.fap             _release/
           cp life_scenes/dist/life_scenes.fap             _release/
           cp ibutton_fuzzer/dist/ibutton_fuzzer.fap       _release/
+          cp subghz_debruijn/dist/subghz_debruijn.fap     _release/
           ls -la _release/
 
       - name: Upload FAPs as workflow artifact
@@ -156,6 +161,7 @@ jobs:
              - \`white_noise.fap\` → \`apps/Media/\`
              - \`life_scenes.fap\` → \`apps/Tools/\` (+ положи .scene в \`/ext/life_scenes/\`)
              - \`ibutton_fuzzer.fap\` → \`apps/iButton/\` (только авторизованный пентест)
+             - \`subghz_debruijn.fap\` → \`apps/Sub-GHz/\` (только авторизованный пентест)
           3. Запусти на Flipper'е через \`Apps → <категория> → <имя>\`
 
           ## Совместимость

@@ -1,0 +1,12 @@
+App(
+    appid="subghz_debruijn",
+    name="SubGHz DeBruijn",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="subghz_debruijn_app",
+    requires=["gui"],
+    stack_size=4 * 1024,
+    fap_category="Sub-GHz",
+    fap_author="feeltheambience",
+    fap_version="1.0",
+    fap_description="Fast fixed-code brute via De Bruijn sequence (authorized pentest)",
+)
